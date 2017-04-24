@@ -1,0 +1,10 @@
+astroid==1.5.2
+colorama==0.3.7
+isort==4.2.5
+lazy-object-proxy==1.2.2
+mccabe==0.6.1
+psycopg2==2.7.1
+pylint==1.7.1
+six==1.10.0
+wrapt==1.10.10
+skyscanner==1.1.4
