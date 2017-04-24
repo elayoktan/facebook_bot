@@ -22,6 +22,68 @@ def verify():
     return "Hello, world!", 200
 
 
+@app.route('/', methods=['POST'])
+def webhook():
+
+    # endpoint for processing incoming messaging events
+    global origin
+    global destination
+    global date
+    data = request.get_json()
+    log(data)  # you may not want to log every incoming message in production, but it's good for testing
+
+    if data["object"] == "page":
+
+        for entry in data["entry"]:
+            for messaging_event in entry["messaging"]:
+
+                if messaging_event.get("message"):  # someone sent us a message
+                    sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
+                    recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
+                    message_text = messaging_event["message"]["text"]  # the message's text
+                    paramsList = message_text.split(",")
+                    try:
+                        origin[sender_id] = paramsList[0]
+                        destination[sender_id] = paramsList[1]
+                        date[sender_id] = paramsList[2]
+                    except:
+                        log("Index error")
+                    try:
+                        url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/try/en-GB/"+origin[sender_id]+"/"+destination[sender_id]+"/"+date[sender_id]+"/?apikey=prtl6749387986743898559646983194"
+                        response = urllib.urlopen(url)  
+                        data = json.loads(response.read())
+                        log(data)
+                        planenames = ""
+                        for quote in data["Quotes"]:
+                            try:
+                                for cid in quote["OutboundLeg"]["CarrierIds"]:
+                                    try:
+                                        for plane in data["Carriers"]:
+                                            if plane["CarrierId"] == cid:
+                                                planenames = str(plane["Name"])
+                                    except:
+                                        log("plane")
+                            except:
+                                log("cid")
+                            datetime = str(quote["OutboundLeg"]["DepartureDate"]).split('T')
+
+                            send_message(sender_id, str(planenames) + " \nDate: " + datetime[0] + " \nTime: " + datetime[1] + " \nPrice: " +str(quote["MinPrice"])+"TL")
+                    except:
+                        log("Session error")
+                
+                
+                if messaging_event.get("delivery"):  # delivery confirmation
+                    pass
+
+                if messaging_event.get("optin"):  # optin confirmation
+                    pass
+
+                if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
+                    pass
+
+    return "ok", 200
+
+
 
 def send_message(recipient_id, message_text):
 
