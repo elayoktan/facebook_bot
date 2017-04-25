@@ -8,7 +8,7 @@ deploy:
   provider: heroku
   api_key:
     secure: b843f694-3742-4285-8a23-862279d15af9
-  app: nereye
+  app:nereye
   on:
     elayoktan/facebook_bot
 
