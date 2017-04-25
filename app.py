@@ -16,10 +16,10 @@ def verify():
     # the 'hub.challenge' value it receives in the query arguments
     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
         if not request.args.get("hub.verify_token") == os.environ["VERIFY_TOKEN"]:
-            return "Verification token fail", 403
+            return "Verification token mismatch", 403
         return request.args["hub.challenge"], 200
 
-    return "Hello, world9!", 200
+    return "Hello world", 200
 
 
 @app.route('/', methods=['POST'])
@@ -66,8 +66,10 @@ def webhook():
                             except:
                                 log("cid")
                             datetime = str(quote["OutboundLeg"]["DepartureDate"]).split('T')
-
-                            send_message(sender_id, str(planenames) + " \nDate: " + datetime[0] + " \nTime: " + datetime[1] + " \nPrice: " +str(quote["MinPrice"])+"TL")
+                            if datetime[1] == "00:00:00":
+                                send_message(sender_id, str(planenames) + " \nDate: " + datetime[0] + " \nPrice: " +str(quote["MinPrice"])+"TL")
+                            else:
+                                send_message(sender_id, str(planenames) + " \nDate: " + datetime[0] + " \nTime: " + datetime[1] + " \nPrice: " +str(quote["MinPrice"])+"TL")
                     except:
                         log("Session error")
                 
@@ -110,7 +112,7 @@ def send_message(recipient_id, message_text):
 
 
 def log(message):  # simple wrapper for logging to stdout on heroku
-   
+    print str(message)
     sys.stdout.flush()
 
 
