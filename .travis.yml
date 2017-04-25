@@ -12,5 +12,5 @@ deploy:
   provider: heroku
   api_key:
     secure: fc326fdb-6253-4c34-946d-5d0293c8bef9
-
+  app: nereye
 
