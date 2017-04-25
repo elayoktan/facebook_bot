@@ -1,15 +1,17 @@
 language: python
 python:
-  - "3.6"
+- '3.6'
 cache: pip
 install:
-  - pip install -r requirements.txt
+- pip install -r requirements.txt
+script:
+- python app.py
 deploy:
   provider: heroku
   api_key:
-    secure: b843f694-3742-4285-8a23-862279d15af9
-  app:nereye
+    secure: YJkXFrAq6byr1kfs9xu4u7TdQI7DbH0HtIX2NoOCqIi/Vh7p5Q6O60IWmGxSS7InCOk7sOrPLCvJy3+Wvx2HqCt/QW8UkIKObZrqg0TygyfQVFYworITo05plslelFhXO9VAqmhL8VoRqZUXsZin4OCVbZzV/bP4yeajZq0GEupV2DKhm9JH1cvlDs8nolQBTHtI7m7i9MhSX8kjj5gQfWyp9LfSdr7gb5KElqwtdnRbf771yPgU4tYBVYbpHHSgV6raD8jPVxE2MMsMqSGEO9ifaxHUlOnrxfpfYv6q1At6iRBdWaMqwoORpZTX2D6WVwA22D9fewdfqQCJaE8cDapATAGXhSKTlgESMOII1Pn2tDfQxJbiWMzplbgfT/wYoXa5vpEJOXGy4r7vWhTGVYAqwS1FeMpImoSAtvY07V507CRpkg8Ug6VYDbK7pfX9FILVdiUdLak2/o7IsDIeB/UGQMSQi5KCi+0G9XdzTCbshfWhMSFFGMmBYEdT2L1JKRvmoeR0OgwcIVKvGqNKww23ddtCZpVp1/MYSX3+EgDjD5eRinVW5aEF/lQYB0NrQRQzluYyA/OuHb9GnLK0Oz6/falDdKLSw++kTYc4eNSw6H8Tak/CCz5YHiCD5zytyqZfTwLhkpYbU9Z7Ff15S+aQbszsvWrrjoVboIShRvE=
+  app: nereye
   on:
-    elayoktan/facebook_bot
+    repo: elayoktan/facebook_bot
 
 
