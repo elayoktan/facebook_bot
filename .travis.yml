@@ -4,15 +4,7 @@ python:
 cache: pip
 install:
 - travis_wait pip install -r requirements.txt
-- pip install
 script:
 - python app.py
-deploy:
-  provider: heroku
-  api_key:
-    secure: b5utVga9OtebKCc41JlFSK4dU1QEgmh8/RUHx1QDN8FiA2LqM/AJSxjwkdNM/ll5Jsobtp6eKZmseiiSfagqYH5YHENf5x4MPGA4IdUkxCqgeo92Q0pXCAi/VqTHN6TwO23EmnxpLaTd+nWVS8zz38MGFx6w04wTg4m6CQO4Tch04ov2wyNJfDi8qjSexQJnC8EysvKWd3a+6Y+DCrRwbB3mPqD0gvddeDSdN27/ZNgurO7tgUGFRXB4I348XJ9iH1l+FA8T+jA0FcHk48tfzbEZR8xOZa+AJ9rcMfDjh7ZizO2QhYNeibGaNAIrvzL07mHV8PeX1oB7+ETfCuTMuL7hsYKwPmVRKiYnMyJtAeDzdSAiP5dfYkUwna0aW5TZiSRHKOI9z8jN1r/3vLX5Y+L7PeiHkIUsfz7s0AsHC0NvmxxYypCPqfi8s8YUzXpnmTya0V62+1K83Mr/8uxinQaBCjEllIk0yDm2gAZQ81fXiQ8WlMGwM/hSSM/mlZEJdDkNbxiDgi4gSDx8DINph9by+2baseE2oNvTvDk+FgypcbYPWHWuzNPT0z9bExrnIFl/0ufyCBGYr2OVmBW0zgeqzoYOy1+uWbNfNSYsFP7QzGYT/MG028cRLIKmZZx/P+3LQqbZIdMLEi6yyxKIjAlMq1PbYF7CQhqOf5o3apY=
-  app: app.py
-  on:
-    repo: elayoktan/facebook_bot
 
 

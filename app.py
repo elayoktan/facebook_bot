@@ -113,7 +113,7 @@ def send_message(recipient_id, message_text):
         log(req.text)
 
 
-def log(message): 
+def log(message):
     """To put the errors and valuable data into logs"""
     print(message)
     sys.stdout.flush()
