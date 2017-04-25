@@ -5,7 +5,7 @@ cache: pip
 install:
 - travis_wait pip install -r requirements.txt
 script:
-- travis_wait python app.py
+- python app.py
 deploy:
   provider: heroku
   api_key:
