@@ -16,4 +16,3 @@ psycopg2==2.7.1
 pylint==1.7.1
 six==1.10.0
 wrapt==1.10.10
-skyscanner==1.1.4
