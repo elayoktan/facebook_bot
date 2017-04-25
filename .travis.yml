@@ -3,7 +3,8 @@ python:
 - '2.7'
 cache: pip
 install:
-- pip install -r requirements.txt
+- travis_wait pip install -r requirements.txt
+- pip install .
 script:
 - python app.py
 deploy:
