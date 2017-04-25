@@ -18,12 +18,14 @@ origin = {'init_key':'init_val'}
 destination = {'init_key':'init_val'}
 date = {'init_key':'init_val'}
 
+VERIFY_TOKEN = "WEUu0NnceuU1l13eSffw"
+
 @app.route('/', methods=['GET'])
 def verify():
     """ when the endpoint is registered as a webhook, it must echo back
-    the 'hub.challenge' value it receives in the query arguments"""
+    the 'hub.challenge' value it receives in the query arguments""" '''os.environ["VERIFY_TOKEN"]:'''
     if request.args.get("hub.mode") == "subscribe" and request.args.get("hub.challenge"):
-        if not request.args.get("hub.verify_token") == os.environ["VERIFY_TOKEN"]:
+        if not request.args.get("hub.verify_token") == VERIFY_TOKEN:
             return "Verification token mismatch", 403
         return request.args["hub.challenge"], 200
 
